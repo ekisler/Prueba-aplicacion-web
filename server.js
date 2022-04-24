@@ -24,12 +24,8 @@ const usuarioSchema = new Schema ({
     contraseña: String
 });
 
-
+//Configuración encrypt-mongoose: AES
 usuarioSchema.plugin(encrypt, {secret: process.env.SECRETOS, encryptedFields: ["contraseña"] });
-
-
-
-
 
 // 2. crear el modelo
 const Usuario = new mongoose.model("Usuario", usuarioSchema);
