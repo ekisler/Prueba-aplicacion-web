@@ -1,9 +1,7 @@
-require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const encrypt = require("mongoose-encryption");
 
 const app = express();
 app.use(express.json());
@@ -12,25 +10,20 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 // conectar atlas
-mongoose.connect("mongodb+srv://mibasededatos:6lOAmdx56J81HWjH@clustermiapp.fjzc0.mongodb.net/MiAppDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://administrador:v5HsZa2qcwo8kOiL@cluster0.teveh.mongodb.net/?retryWrites=true&w=majority");
+// mongoose.connect("mongodb+srv://admministrador:v5HsZa2qcwo8kOiL@clustermiapp.fjzc0.mongodb.net/pokemon", {useNewUrlParser: true});
 
 
 //Base de datos
 //1. Esquema
-const Schema = mongoose.Schema;
-const usuarioSchema = new Schema ({
+const usuarioSchema = {
     nombre: String,
     email: String,
     contraseña: String
-});
-
-//Configuración encrypt-mongoose: AES
-usuarioSchema.plugin(encrypt, {secret: process.env.SECRETOS, encryptedFields: ["contraseña"] });
+}
 
 // 2. crear el modelo
 const Usuario = new mongoose.model("Usuario", usuarioSchema);
-
-
 
 
 //Método post
@@ -56,7 +49,7 @@ app.post("/registrar", function (req, res){
 
 
 
-//////// 2 fragmentos necesarios para implementar heroku
+////////// 2 fragmentos necesarios para implementar heroku
 
 // usar estáticos cuando esta en modo produccion //
 if(process.env.NODE_ENV === 'production') {

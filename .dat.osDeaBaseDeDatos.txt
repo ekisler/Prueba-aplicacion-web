@@ -1,0 +1,3 @@
+administrador
+v5HsZa2qcwo8kOiL
+mongodb+srv://administrador:v5HsZa2qcwo8kOiL@cluster0.teveh.mongodb.net/?retryWrites=true&w=majority
