@@ -1,7 +1,10 @@
+
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const encrypt = require("mongoose-encryption");
 
 const app = express();
 app.use(express.json());
@@ -16,14 +19,20 @@ mongoose.connect("mongodb+srv://administrador:v5HsZa2qcwo8kOiL@cluster0.teveh.mo
 
 //Base de datos
 //1. Esquema
-const usuarioSchema = {
+const Schema = mongoose.Schema;
+const usuarioSchema = new Schema ({
     nombre: String,
     email: String,
     contraseña: String
-}
+});
+
+//Configuración encrypt-mongoose: AES
+usuarioSchema.plugin(encrypt, {secret: process.env.SECRETOS, encryptedFields: ["contraseña"] });
 
 // 2. crear el modelo
 const Usuario = new mongoose.model("Usuario", usuarioSchema);
+
+
 
 
 //Método post
@@ -49,7 +58,7 @@ app.post("/registrar", function (req, res){
 
 
 
-////////// 2 fragmentos necesarios para implementar heroku
+//////// 2 fragmentos necesarios para implementar heroku
 
 // usar estáticos cuando esta en modo produccion //
 if(process.env.NODE_ENV === 'production') {
