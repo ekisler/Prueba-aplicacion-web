@@ -1,3 +1,4 @@
+// Ejemplo para pagina home
 import React from "react";
 
 function Home(){
