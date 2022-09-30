@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 // conectar atlas
-mongoose.connect("mongodb+srv://administrador:v5HsZa2qcwo8kOiL@cluster0.teveh.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://administrador:v5HsZa2qcwo8kOiL@cluster0.teveh.mongodb.net/pokemon=true&w=majority");
 // mongoose.connect("mongodb+srv://admministrador:v5HsZa2qcwo8kOiL@clustermiapp.fjzc0.mongodb.net/pokemon", {useNewUrlParser: true});
 
 
